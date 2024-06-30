@@ -5,7 +5,7 @@ import io.jsonwebtoken.*;
 import java.util.Date;
 
 public class JwtHelper {
-    private static long tokenExpiration = 24 * 60 * 60 * 1000;
+    private static long tokenExpiration = 24 * 60 * 60 * 1000;  // 24 小時
     private static String tokenSignKey = "123456";
 
     // 生成token
