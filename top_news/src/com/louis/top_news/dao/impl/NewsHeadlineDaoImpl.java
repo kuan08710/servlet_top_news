@@ -2,6 +2,7 @@ package com.louis.top_news.dao.impl;
 
 import com.louis.top_news.dao.BaseDao;
 import com.louis.top_news.dao.NewsHeadlineDao;
+import com.louis.top_news.pojo.NewsHeadline;
 import com.louis.top_news.pojo.vo.HeadlineDetailVo;
 import com.louis.top_news.pojo.vo.HeadlinePageVo;
 import com.louis.top_news.pojo.vo.HeadlineQueryVo;
@@ -115,5 +116,27 @@ public class NewsHeadlineDaoImpl extends BaseDao implements NewsHeadlineDao {
             return list.get(0);
         }
         return null;
+    }
+
+    @Override
+    public int addNewsHeadline (NewsHeadline newsHeadline) {
+        String sql = """
+                    INSERT INTO
+                        news_headline 
+                    VALUES ( 
+                        DEFAULT
+                        , ?
+                        , ?
+                        , ?
+                        , ?
+                        , 0
+                        , NOW()
+                        , NOW()
+                        , 0
+                    )
+                """;
+        return baseUpdate(sql , newsHeadline.getTitle() , newsHeadline.getArticle() , newsHeadline.getType() ,
+                          newsHeadline.getPublisher()
+        );
     }
 }

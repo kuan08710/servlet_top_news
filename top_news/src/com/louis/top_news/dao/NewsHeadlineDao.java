@@ -1,5 +1,6 @@
 package com.louis.top_news.dao;
 
+import com.louis.top_news.pojo.NewsHeadline;
 import com.louis.top_news.pojo.vo.HeadlineDetailVo;
 import com.louis.top_news.pojo.vo.HeadlinePageVo;
 import com.louis.top_news.pojo.vo.HeadlineQueryVo;
@@ -14,4 +15,6 @@ public interface NewsHeadlineDao {
     int increasePageViews (Integer hid);
 
     HeadlineDetailVo findHeadlineDetail (Integer hid);
+
+    int addNewsHeadline (NewsHeadline newsHeadline);
 }

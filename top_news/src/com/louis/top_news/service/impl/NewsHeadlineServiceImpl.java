@@ -2,6 +2,7 @@ package com.louis.top_news.service.impl;
 
 import com.louis.top_news.dao.NewsHeadlineDao;
 import com.louis.top_news.dao.impl.NewsHeadlineDaoImpl;
+import com.louis.top_news.pojo.NewsHeadline;
 import com.louis.top_news.pojo.vo.HeadlineDetailVo;
 import com.louis.top_news.pojo.vo.HeadlinePageVo;
 import com.louis.top_news.pojo.vo.HeadlineQueryVo;
@@ -56,5 +57,10 @@ public class NewsHeadlineServiceImpl implements NewsHeadlineService {
 
         newsHeadlineDao.increasePageViews(hid);
         return newsHeadlineDao.findHeadlineDetail(hid);
+    }
+
+    @Override
+    public int addNewsHeadline (NewsHeadline newsHeadline) {
+        return newsHeadlineDao.addNewsHeadline(newsHeadline);
     }
 }
