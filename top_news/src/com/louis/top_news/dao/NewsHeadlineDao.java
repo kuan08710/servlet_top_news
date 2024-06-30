@@ -19,4 +19,6 @@ public interface NewsHeadlineDao {
     int addNewsHeadline (NewsHeadline newsHeadline);
 
     NewsHeadline findHeadlineByHid (Integer hid);
+
+    int updateNewsHeadline (NewsHeadline newsHeadline);
 }

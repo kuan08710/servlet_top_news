@@ -43,4 +43,10 @@ public class NewsHeadlineController extends BaseController {
         data.put("headline" , newsHeadline);
         WebUtil.writeJson(resp , Result.ok(data));
     }
+
+    protected void update (HttpServletRequest req , HttpServletResponse resp) throws ServletException, IOException {
+        NewsHeadline newsHeadline = WebUtil.readJson(req , NewsHeadline.class);
+        newsHeadlineService.updateNewsHeadline(newsHeadline);
+        WebUtil.writeJson(resp , Result.ok(null));
+    }
 }

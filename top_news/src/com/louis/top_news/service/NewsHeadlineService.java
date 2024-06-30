@@ -14,4 +14,6 @@ public interface NewsHeadlineService {
     int addNewsHeadline (NewsHeadline newsHeadline);
 
     NewsHeadline findHeadlineByHid (Integer hid);
+
+    int updateNewsHeadline (NewsHeadline newsHeadline);
 }
