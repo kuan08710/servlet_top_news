@@ -23,10 +23,10 @@ public class NewsHeadlineDaoImpl extends BaseDao implements NewsHeadlineDao {
                         , page_views pageViews
                         , TIMESTAMPDIFF(HOUR,create_time,NOW()) pastHours
                         , publisher
-                    FROM 
-                        news_headline 
-                    WHERE 
-                        is_deleted = 0 
+                    FROM
+                        news_headline
+                    WHERE
+                        is_deleted = 0
                 """;
         StringBuilder sqlBuffer = new StringBuilder(sql);
 
@@ -57,12 +57,12 @@ public class NewsHeadlineDaoImpl extends BaseDao implements NewsHeadlineDao {
     public int findPageCount (HeadlineQueryVo headLineQueryVo) {
         List<Object> args = new LinkedList<>();
         String sql = """
-                    SELECT 
+                    SELECT
                         COUNT(1)
-                    FROM 
+                    FROM
                         news_headline
-                    WHERE 
-                        is_deleted = 0 
+                    WHERE
+                        is_deleted = 0
                 """;
         StringBuilder sqlBuffer = new StringBuilder(sql);
         String keyWords = headLineQueryVo.getKeyWords();
@@ -86,7 +86,7 @@ public class NewsHeadlineDaoImpl extends BaseDao implements NewsHeadlineDao {
     public int increasePageViews (Integer hid) {
         String sql = """
                     UPDATE news_headline SET
-                        page_views = page_views +1 
+                        page_views = page_views + 1
                     WHERE hid = ?
                 """;
         return baseUpdate(sql , hid);
@@ -100,15 +100,15 @@ public class NewsHeadlineDaoImpl extends BaseDao implements NewsHeadlineDao {
                         , title
                         , article
                         , type
-                        , tname typeName 
-                        , page_views pageViews 
-                        , TIMESTAMPDIFF(HOUR, create_time ,NOW()) pastHours 
-                        , publisher 
-                        , nick_name author 
-                    FROM news_headline h 
-                        LEFT JOIN news_type t ON h.type = t.tid 
-                        LEFT JOIN news_user u ON h.publisher = u.uid 
-                    WHERE hid = ? 
+                        , tname typeName
+                        , page_views pageViews
+                        , TIMESTAMPDIFF(HOUR, create_time ,NOW()) pastHours
+                        , publisher
+                        , nick_name author
+                    FROM news_headline h
+                        LEFT JOIN news_type t ON h.type = t.tid
+                        LEFT JOIN news_user u ON h.publisher = u.uid
+                    WHERE hid = ?
                 """;
 
         List<HeadlineDetailVo> list = baseQuery(HeadlineDetailVo.class , sql , hid);
@@ -122,8 +122,8 @@ public class NewsHeadlineDaoImpl extends BaseDao implements NewsHeadlineDao {
     public int addNewsHeadline (NewsHeadline newsHeadline) {
         String sql = """
                     INSERT INTO
-                        news_headline 
-                    VALUES ( 
+                        news_headline
+                    VALUES (
                         DEFAULT
                         , ?
                         , ?
@@ -136,7 +136,27 @@ public class NewsHeadlineDaoImpl extends BaseDao implements NewsHeadlineDao {
                     )
                 """;
         return baseUpdate(sql , newsHeadline.getTitle() , newsHeadline.getArticle() , newsHeadline.getType() ,
-                          newsHeadline.getPublisher()
-        );
+                          newsHeadline.getPublisher());
+    }
+
+    @Override
+    public NewsHeadline findHeadlineByHid (Integer hid) {
+        String sql = """
+                    SELECT
+                        hid
+                        , title
+                        , article
+                        , type
+                        , publisher
+                        , page_views pageViews
+                    FROM
+                        news_headline
+                    WHERE hid = ?
+                """;
+        List<NewsHeadline> newsHeadlineList = baseQuery(NewsHeadline.class , sql , hid);
+        if (null != newsHeadlineList && newsHeadlineList.size() > 0) {
+            return newsHeadlineList.get(0);
+        }
+        return null;
     }
 }
