@@ -49,4 +49,11 @@ public class NewsHeadlineController extends BaseController {
         newsHeadlineService.updateNewsHeadline(newsHeadline);
         WebUtil.writeJson(resp , Result.ok(null));
     }
+
+    protected void removeByHid (HttpServletRequest req , HttpServletResponse resp)
+            throws ServletException, IOException {
+        Integer hid = Integer.parseInt(req.getParameter("hid"));
+        newsHeadlineService.removeByHid(hid);
+        WebUtil.writeJson(resp , Result.ok(null));
+    }
 }
