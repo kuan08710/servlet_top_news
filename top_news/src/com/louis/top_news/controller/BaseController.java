@@ -12,7 +12,7 @@ public class BaseController extends HttpServlet {
     @Override
     protected void service (HttpServletRequest req , HttpServletResponse resp) throws ServletException, IOException {
 
-        resp.setContentType("application/json;charset=UTF-8");
+        // resp.setContentType("application/json;charset=UTF-8");
 
         String requestURI = req.getRequestURI();
         String[] split = requestURI.split("/");

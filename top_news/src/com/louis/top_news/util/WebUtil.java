@@ -38,7 +38,7 @@ public class WebUtil {
 
     // 將 Result 轉成 JSON，並放入 Response
     public static void writeJson (HttpServletResponse response , Result result) {
-        response.setContentType("application/􀁌son;charset=UTF-8");
+        response.setContentType("application/json;charset=UTF-8");
         try {
             String json = objectMapper.writeValueAsString(result);
             response.getWriter()
