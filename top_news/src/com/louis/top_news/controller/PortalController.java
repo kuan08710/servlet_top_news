@@ -2,6 +2,7 @@ package com.louis.top_news.controller;
 
 import com.louis.top_news.common.Result;
 import com.louis.top_news.pojo.NewsType;
+import com.louis.top_news.pojo.vo.HeadlineDetailVo;
 import com.louis.top_news.pojo.vo.HeadlineQueryVo;
 import com.louis.top_news.service.NewsHeadlineService;
 import com.louis.top_news.service.NewsTypeService;
@@ -43,4 +44,15 @@ public class PortalController extends BaseController {
         WebUtil.writeJson(resp , Result.ok(pageInfoMap));
     }
 
+    protected void showHeadlineDetail (HttpServletRequest req , HttpServletResponse resp)
+            throws ServletException, IOException {
+
+        Integer hid = Integer.parseInt(req.getParameter("hid"));
+        HeadlineDetailVo headlineDetailVo = newsHeadlineService.findHeadlineDetail(hid);
+
+        Map < String , Object > data = new HashMap<>();
+        data.put("headline" , headlineDetailVo);
+
+        WebUtil.writeJson(resp ,Result.ok(data));
+    }
 }

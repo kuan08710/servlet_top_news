@@ -2,6 +2,7 @@ package com.louis.top_news.service.impl;
 
 import com.louis.top_news.dao.NewsHeadlineDao;
 import com.louis.top_news.dao.impl.NewsHeadlineDaoImpl;
+import com.louis.top_news.pojo.vo.HeadlineDetailVo;
 import com.louis.top_news.pojo.vo.HeadlinePageVo;
 import com.louis.top_news.pojo.vo.HeadlineQueryVo;
 import com.louis.top_news.service.NewsHeadlineService;
@@ -48,5 +49,12 @@ public class NewsHeadlineServiceImpl implements NewsHeadlineService {
         pageInfo.put("totalSize" , totalSize);
 
         return pageInfo;
+    }
+
+    @Override
+    public HeadlineDetailVo findHeadlineDetail (Integer hid) {
+
+        newsHeadlineDao.increasePageViews(hid);
+        return newsHeadlineDao.findHeadlineDetail(hid);
     }
 }
